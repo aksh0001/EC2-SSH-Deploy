@@ -41,6 +41,7 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: REMOTE_TARGET_DIRECTORY
+          debug: false
           script_stop: true
           script: |
             echo 'Running dependency installation script'
