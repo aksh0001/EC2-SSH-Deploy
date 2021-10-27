@@ -27,7 +27,7 @@ jobs:
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rLtgoDzvO --delete"  # Using -L rsync option to dereference bazel symlinks
+          ARGS: "-rKLtgoDzvO --delete"  # Using -KL rsync option to dereference bazel symlinks
           SOURCE: ${{ env.GITHUB_WORKSPACE }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
