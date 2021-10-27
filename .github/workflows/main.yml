@@ -11,7 +11,6 @@ jobs:
       - uses: bazelbuild/setup-bazelisk@v1
       - name: Building app
         run: bazel build //:all
-
   deploy_app:
     name: Deploy Sample App to EC2
     needs:
@@ -33,3 +32,12 @@ jobs:
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET_DIRECTORY }}
           EXCLUDE: "/.git/, bazel-testlogs"
+      - name: Update Dependencies
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            whoami && pwd
+            echo 'Running dependency installation script'
