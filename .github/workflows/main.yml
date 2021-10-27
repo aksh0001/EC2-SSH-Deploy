@@ -23,13 +23,11 @@ jobs:
       - uses: bazelbuild/setup-bazelisk@v1
       - name: Building app
         run: bazel build //:all
-      - run: mkdir bin
-      - name: Copy binaries
-        run: cp -Lr ./bazel-bin/* ./bin/
       - name: Deploy App
         uses: easingthemes/ssh-deploy@main
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rLtgoDzvO --delete"  # Using -L rsync option to dereference bazel symlinks
           SOURCE: ${{ env.GITHUB_WORKSPACE }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
