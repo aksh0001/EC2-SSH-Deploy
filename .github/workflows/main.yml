@@ -25,7 +25,7 @@ jobs:
         run: bazel build //:all
       - run: mkdir bin
       - name: Copy binaries
-        run: cp -r ./bazel-bin/* ./bin/
+        run: cp -Lr ./bazel-bin/* ./bin/
       - name: Deploy App
         uses: easingthemes/ssh-deploy@main
         env:
@@ -34,4 +34,4 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_USER: ${{ secrets.REMOTE_USER }}
           TARGET: ${{ secrets.REMOTE_TARGET_DIRECTORY }}
-          EXCLUDE: "/bazel-bin/, /bazel-EC2-SSH-Deploy/, /bazel-out/, /bazel-testlogs/, /.git/"
+          EXCLUDE: "/.git/, bazel-bin, bazel-EC2-SSH-Deploy, bazel-out, bazel-testlogs"
