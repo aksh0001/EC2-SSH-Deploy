@@ -16,7 +16,7 @@ jobs:
     name: Deploy Sample App to EC2
     needs:
       - build_app
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     if: github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v2
@@ -24,8 +24,8 @@ jobs:
       - name: Building app
         run: bazel build //:all
       - run: mkdir bin
-      - name: Copy required binaries
-        run: cp ./bazel-bin/main ./bin/
+      - name: Copy binaries
+        run: cp -r ./bazel-bin/* ./bin/
       - name: Deploy App
         uses: easingthemes/ssh-deploy@main
         env:
