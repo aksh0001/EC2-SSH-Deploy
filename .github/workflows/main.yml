@@ -46,4 +46,4 @@ jobs:
           script: |
             whoami && pwd
             echo 'Running dependency installation script'
-            $REMOTE_TARGET_DIRECTORY/scripts/install_dependencies.sh
+            sudo $REMOTE_TARGET_DIRECTORY/scripts/install_dependencies.sh
