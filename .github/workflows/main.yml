@@ -34,10 +34,15 @@ jobs:
           EXCLUDE: "/.git/, bazel-testlogs"
       - name: Update Dependencies
         uses: appleboy/ssh-action@master
+        env:
+          REMOTE_TARGET_DIRECTORY: ${{ secrets.REMOTE_TARGET_DIRECTORY }}
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
+          envs: REMOTE_TARGET_DIRECTORY
+          script_stop: true
           script: |
             whoami && pwd
             echo 'Running dependency installation script'
+            echo $REMOTE_TARGET_DIRECTORY
