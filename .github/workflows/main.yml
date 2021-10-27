@@ -41,8 +41,9 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           envs: REMOTE_TARGET_DIRECTORY
+          debug: true
           script_stop: true
           script: |
             whoami && pwd
             echo 'Running dependency installation script'
-            echo $REMOTE_TARGET_DIRECTORY
+            $REMOTE_TARGET_DIRECTORY/scripts/install_dependencies.sh
